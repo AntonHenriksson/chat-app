@@ -1,11 +1,8 @@
-package se.sprinto.hakan.chatapp;
+package se.jensen.anton.chatapp;
 
-import se.sprinto.hakan.chatapp.dao.MessageDAO;
-import se.sprinto.hakan.chatapp.dao.MessageListDAO;
-import se.sprinto.hakan.chatapp.dao.UserDAO;
-import se.sprinto.hakan.chatapp.dao.UserListDAO;
-import se.sprinto.hakan.chatapp.model.Message;
-import se.sprinto.hakan.chatapp.model.User;
+import se.jensen.anton.chatapp.dao.*;
+import se.jensen.anton.chatapp.model.Message;
+import se.jensen.anton.chatapp.model.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,8 +18,8 @@ public class ClientHandler implements Runnable {
     private PrintWriter out;
     private User user;
 
-    private final UserDAO userDAO = new UserListDAO();
-    private final MessageDAO messageDAO = new MessageListDAO();
+    private final UserDAO userDAO = new UserDatabaseDAO();
+    private final MessageDAO messageDAO = new MessageDatabaseDAO();
 
     ClientHandler(Socket socket, ChatServer server) {
         this.socket = socket;

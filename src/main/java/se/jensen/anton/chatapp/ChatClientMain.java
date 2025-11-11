@@ -1,4 +1,4 @@
-package se.sprinto.hakan.chatapp;
+package se.jensen.anton.chatapp;
 
 public class ChatClientMain {
 
