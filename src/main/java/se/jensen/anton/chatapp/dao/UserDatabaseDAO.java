@@ -10,7 +10,12 @@ public class UserDatabaseDAO implements UserDAO {
     public User login(String username, String password) {
 
         int id = 0;
-        String loginUser = "SELECT * FROM users WHERE user_name = ? AND password = ?";
+        String loginUser = """
+                SELECT * FROM users 
+                JOIN messages
+                ON users.user_id = messages.user_id
+                WHERE user_name = ? AND password = ?
+                """;
         try (Connection conn = Connector.getInstance().getConnection();
              PreparedStatement psmt = conn.prepareStatement(loginUser)) {
             psmt.setString(1, username);
