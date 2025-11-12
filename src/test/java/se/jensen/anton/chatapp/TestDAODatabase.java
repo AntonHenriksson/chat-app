@@ -9,7 +9,7 @@ import se.jensen.anton.chatapp.dao.UserDAO;
 import se.jensen.anton.chatapp.dao.UserDatabaseDAO;
 import se.jensen.anton.chatapp.model.Message;
 import se.jensen.anton.chatapp.model.User;
-import se.jensen.anton.chatapp.service.TestConnector;
+import se.jensen.anton.chatapp.service.Connector;
 
 
 import java.sql.Connection;
@@ -23,12 +23,12 @@ public class TestDAODatabase {
 
     @BeforeEach
     public void startDatabase() throws SQLException {
-        String createUsersSql = "CREATE TABLE users (user_id INT PRIMARY KEY," +
+        String createUsersSql = "CREATE TABLE users (user_id INT AUTO_INCREMENT PRIMARY KEY," +
                 " user_name VARCHAR(20) NOT NULL, password VARCHAR(20) NOT NULL)";
         String createMessagesSql = "CREATE TABLE messages (user_id INT," +
                 " message VARCHAR(300) NOT NULL, timestamp DATETIME NOT NULL," +
                 "FOREIGN KEY (user_id) REFERENCES users(user_id))";
-        try (Connection conn = TestConnector.getInstance().getConnection();
+        try (Connection conn = Connector.getInstance().getConnection();
              PreparedStatement psmt = conn.prepareStatement(createUsersSql);
              PreparedStatement psmt2 = conn.prepareStatement(createMessagesSql)) {
             psmt.executeUpdate();
@@ -52,7 +52,7 @@ public class TestDAODatabase {
     public void cleanDatabase() throws SQLException {
         String cleanMessages = "DROP TABLE IF EXISTS messages";
         String cleanUsers = "DROP TABLE IF EXISTS users";
-        try (Connection conn = TestConnector.getInstance().getConnection();
+        try (Connection conn = Connector.getInstance().getConnection();
              PreparedStatement psmt = conn.prepareStatement(cleanMessages);
              PreparedStatement psmt2 = conn.prepareStatement(cleanUsers)) {
             psmt.executeUpdate();
