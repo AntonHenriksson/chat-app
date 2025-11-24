@@ -9,9 +9,9 @@ public class UserDatabaseDAO implements UserDAO {
     @Override
     public User login(String username, String password) {
 
-        int id = 0;
+
         String loginUser = """
-                SELECT * FROM users 
+                SELECT * FROM users
                 JOIN messages
                 ON users.user_id = messages.user_id
                 WHERE user_name = ? AND password = ?
@@ -22,7 +22,7 @@ public class UserDatabaseDAO implements UserDAO {
             psmt.setString(2, password);
             try (ResultSet rs = psmt.executeQuery()) {
                 if (rs.next()) {
-                    id = rs.getInt("user_id");
+                    int id = rs.getInt("user_id");
                     String dbUsername = rs.getString("user_name");
                     String dbPassword = rs.getString("password");
                     return new User(id, dbUsername, dbPassword);

@@ -37,7 +37,7 @@ public class TestDAODatabase {
     }
 
     @Test
-    public void runTest() throws SQLException {
+    public void runTest() {
         MessageDAO messageDAO = new MessageDatabaseDAO();
         UserDAO UserDAO = new UserDatabaseDAO();
         User user = UserDAO.register(new User("testname", "password"));
